@@ -8,7 +8,7 @@
 	<title>Bookmarks</title>
 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-	<link rel="stylesheet" href="styles.css" />
+	<link rel="stylesheet" href="resources/css/styles.css" />
 
 </head>
 
@@ -18,6 +18,54 @@
 
 include "database.php";
 include "tables.php";
+
+?>
+
+<h1>Bookmarks</h1>
+
+<div id='creation'>
+<div id='creation-category'>
+<span class='toggle-button'>Create Category</span>
+<form method='post'>
+<select name="category-parent">
+<option value="-">None</option>
+<?php
+$select_categorys = $db->query("SELECT id, name FROM categorys WHERE parent_id IS NULL");
+$categorys = $select_categorys->fetchAll();
+
+foreach ($categorys as $category) {
+	echo "<option value='" . $category["id"] . "'>" . $category["name"] . "</option>";
+}
+?>
+</select>
+<input type='text' name='category-name' placeholder='Category Name' />
+<button type='submit' name='create-category'>Create Category</button>
+</form>
+</div>
+
+<div id='creation-bookmark'>
+<span class='toggle-button'>Create Bookmark</span>
+<form method='post'>
+<select name='bookmark-category'>
+<?php
+$select_categorys = $db->query("SELECT id, name FROM categorys");
+$categorys = $select_categorys->fetchAll();
+
+foreach ($categorys as $category) {
+	echo "<option value='" . $category["id"] . "'>" . $category["name"] . "</option>";
+}
+?>
+</select>
+<input type='text' name='bookmark-name' placeholder="Bookmark Title" />
+<input type='text' name='bookmark-url' placeholder="Bookmark URL" />
+<input type='text' name='bookmark-description' placeholder="Bookmark Description" />
+<button type='submit' name='create-bookmark'>Create Bookmark</button>
+</div>
+</div>
+
+<script src="resources/js/main.js"></script>
+
+<?php
 
 if( isset($_POST["create-category"]) ) {
 	try {
@@ -77,8 +125,6 @@ if( isset($_POST["delete-bookmark"]) ) {
 	}
 }
 
-echo '<h1>Bookmarks</h1>';
-
 $select_categorys = $db->query("SELECT id, name FROM categorys WHERE parent_id IS NULL");
 $categorys = $select_categorys->fetchAll();
 
@@ -132,46 +178,6 @@ foreach ($categorys as $category) {
 echo "</div>";
 
 ?>
-
-	<div id='creation'>
-		<div id='creation-category'>
-			<span class='toggle-button'>Create Category</span>
-			<form method='post'>
-				<select name="category-parent">
-					<option value="-">None</option>
-					<?php
-					$select_categorys = $db->query("SELECT id, name FROM categorys WHERE parent_id IS NULL");
-					$categorys = $select_categorys->fetchAll();
-
-					foreach ($categorys as $category) {
-						echo "<option value='" . $category["id"] . "'>" . $category["name"] . "</option>";
-					}
-					?>
-				</select>
-				<input type='text' name='category-name' placeholder='Category Name' />
-				<button type='submit' name='create-category'>Create Category</button>
-			</form>
-		</div>
-
-		<div id='creation-bookmark'>
-			<span class='toggle-button'>Create Bookmark</span>
-			<form method='post'>
-				<select name='bookmark-category'>
-					<?php
-					$select_categorys = $db->query("SELECT id, name FROM categorys");
-					$categorys = $select_categorys->fetchAll();
-
-					foreach ($categorys as $category) {
-						echo "<option value='" . $category["id"] . "'>" . $category["name"] . "</option>";
-					}
-					?>
-				</select>
-				<input type='text' name='bookmark-name' placeholder="Bookmark Title" />
-				<input type='text' name='bookmark-url' placeholder="Bookmark URL" />
-				<input type='text' name='bookmark-description' placeholder="Bookmark Description" />
-				<button type='submit' name='create-bookmark'>Create Bookmark</button>
-		</div>
-	</div>
 
 </body>
 </html>

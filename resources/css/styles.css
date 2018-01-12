@@ -1,0 +1,63 @@
+body, html {
+	margin: 10px;
+	text-align: center;
+}
+
+input, select {
+	border: 2px solid black;
+	padding: 5px 20px;
+	border: 2px solid black;
+	height: 34px;
+}
+
+button {
+	height: 34px;
+	padding 5px 20px;
+	color: white;
+	background-color: black;
+	border: none;
+}
+
+.category {
+	width: 400px;
+	margin: 10px;
+	border-radius: 20px;
+	background-color: #C0C0C0;
+	padding: 25px;
+}
+
+.bookmark {
+	display: flex;
+	margin-bottom: 3px;
+}
+
+.bookmark button {
+	height: 22px;
+	padding: 2px 5px;
+	font-weight: bold;
+	margin: 0 10px;
+}
+
+#creation span {
+	cursor: pointer;
+	padding: 10px 30px;
+	border-radius: 20px;
+	background-color: black;
+	color: white;
+}
+
+#creation-category form,
+#creation-bookmark form{
+	display: none;
+}
+
+#creation-category,
+#creation-bookmark {
+	margin: 30px 0;
+}
+
+#bookmarks {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
