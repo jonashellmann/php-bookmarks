@@ -48,6 +48,18 @@ if( isset($_POST["create-bookmark"]) ) {
 	}
 }
 
+if( isset($_POST["delete-bookmark"]) ) {
+	try {
+		$sql = $db->prepare("DELETE FROM bookmark WHERE id = :id");
+		$sql->bindParam(':id', $_POST['bookmark-id'], PDO::PARAM_INT);
+		$sql->execute();
+
+	}
+	catch (Exception $e) {
+		exit($e->getMessage());
+	}
+}
+
 echo '<h1>Bookmarks</h1>';
 
 $select_categorys = $db->query("SELECT id, name FROM category");
@@ -59,12 +71,17 @@ foreach ($categorys as $category) {
 	echo "<div class='category'>";
 	echo "<h2>" . $category["name"] . "</h2>";
 
-	$select_bookmarks = $db->query("SELECT url, name, description FROM bookmark");
+	$select_bookmarks = $db->query("SELECT id, url, name, description FROM bookmark");
 	$bookmarks = $select_bookmarks->fetchAll();
 
 	foreach ($bookmarks as $bookmark) {
 		echo "<div class='bookmark'>";
 		echo "<a href='" . $bookmark["url"] . "' target='_blank'>" . $bookmark["name"] . "</a>";
+		echo "<form method='post'>";
+		echo "<button type='submit' name='delete-bookmark'>X</button>";
+		echo "<input type='text' name='bookmark-id' value='" . $bookmark["id"] . "' style='display: none;' />";
+		echo "</form>";
+		echo "<p>" . $bookmark["description"] . "<p>";
 		echo "</div>";
 	}
 
@@ -87,7 +104,7 @@ echo "</div>";
 		<div id='creation-bookmark'>
 			<span class='toggle-button'>Create Bookmark</span>
 			<form method='post'>
-				<select name'bookmark-category'>
+				<select name='bookmark-category'>
 					<?php
 					$select_categorys = $db->query("SELECT id, name FROM category");
 					$categorys = $select_categorys->fetchAll();
