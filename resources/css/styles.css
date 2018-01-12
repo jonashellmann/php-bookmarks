@@ -29,13 +29,23 @@ button {
 .bookmark {
 	display: flex;
 	margin-bottom: 3px;
+	flex-wrap: wrap;
+	text-align: left;
+}
+.bookmark a {
+	width: calc(100% - 39px);
 }
 
-.bookmark button {
+.bookmark button {i
+	width: 9px;
 	height: 22px;
 	padding: 2px 5px;
 	font-weight: bold;
 	margin: 0 10px;
+}
+
+.bookmark-description {
+	width: 100%;
 }
 
 #creation span {

@@ -165,7 +165,7 @@ foreach ($categorys as $category) {
 			 echo "<button type='submit' name='delete-bookmark'>X</button>";
 			 echo "<input type='text' name='bookmark-id' value='" . $bookmark["id"] . "' style='display: none;' />";
 			 echo "</form>";
-			 echo "<p>" . $bookmark["description"] . "<p>";
+			 echo "<p class='bookmark-description'>" . $bookmark["description"] . "<p>";
 			 echo "</div>";
 		 }
 
