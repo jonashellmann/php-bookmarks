@@ -135,7 +135,7 @@ if( isset($_POST["delete-bookmark"]) ) {
 	}
 }
 
-$select_categorys = $db->query("SELECT id, name FROM categorys WHERE parent_id IS NULL");
+$select_categorys = $db->query("SELECT id, name FROM categorys WHERE parent_id IS NULL AND user_id = " . $userid);
 $categorys = $select_categorys->fetchAll();
 
 echo "<div id='bookmarks'>";
@@ -144,7 +144,7 @@ foreach ($categorys as $category) {
 	echo "<div class='category'>";
 	echo "<h2>" . $category["name"] . "</h2>";
 
-	$select_bookmarks = $db->query("SELECT id, url, name, description FROM bookmarks WHERE category_id = " . $category["id"] . "AND user_id = " . $userid);
+	$select_bookmarks = $db->query("SELECT id, url, name, description FROM bookmarks WHERE category_id = " . $category["id"]);
 	$bookmarks = $select_bookmarks->fetchAll();
 
 	foreach ($bookmarks as $bookmark) {
