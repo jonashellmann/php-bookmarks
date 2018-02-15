@@ -4,12 +4,14 @@ session_start();
 
 include '../database.php';
 
+$_POST = json_decode(file_get_contents('php://input'), true);
+
 if( !isset($_POST['op']) ) {
-	exit('{"error"="You must choose an operation to perform"}');
+	exit('{"error":"You must choose an operation to perform"}');
 }
 
 if ( !isset($_POST['username']) || !isset($_POST['password']) ) {
-	exit('{"error"="You must choose an username and a password!"}');
+	exit('{"error":"You must choose an username and a password!"}');
 }
 
 $operation = $_POST['op'];
@@ -24,7 +26,7 @@ if( $user !== false && password_verify($password, $user['password']) ) {
 	$userid = $user['id'];
 }
 else {
-	exit('{"error"="Username or password invalid"}');
+	exit('{"error":"Username or password invalid"}');
 }
 
 if($operation === 'categorys') {
@@ -37,7 +39,7 @@ if($operation === 'categorys') {
 
 if($operation === 'bookmarks') {
 	if( !isset($_POST['categoryid']) ) {
-		exit('{"error"="No category ID provided"}');
+		exit('{"error":"No category ID provided"}');
 	}
 
 	$categoryid = $_POST['categoryid'];
@@ -50,6 +52,6 @@ if($operation === 'bookmarks') {
 
 }
 
-exit('{"error"="Operation not found"}');
+exit('{"error":"Operation not found"}');
 
 ?>
