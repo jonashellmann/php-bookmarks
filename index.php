@@ -21,7 +21,8 @@
   session_start();
 
   if( isset($_SESSION['user_id']) ) {
-    header('Location: /bookmarks/bookmarks.php');
+    header('Location: bookmarks.php');
+    die();
   }
 
   include 'database.php';
@@ -37,7 +38,8 @@
 
       if( $user !== false && password_verify($password, $user['password']) ) {
         $_SESSION['user_id'] = $user['id'];
-        header('Location: /bookmarks/bookmarks.php');
+        header('Location: /bookmarks.php');
+        die();
       }
       else {
         $errortext = "Username or pasword is not correct!";

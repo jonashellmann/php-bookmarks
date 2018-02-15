@@ -19,7 +19,8 @@
   session_start();
 
   if(!isset($_SESSION['user_id'])) {
-    header('Location: /bookmarks/index.php');
+    header('Location: index.php');
+    die();
   }
 
   $userid = $_SESSION['user_id'];
