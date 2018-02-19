@@ -49,6 +49,9 @@
       exit($e->getMessage());
     }
   }
+  elseif ( isset($_GET['username']) ) {
+    $username_value = $_GET['username'];
+  }
 
   if( isset($errortext) ){
     echo $errortext;
@@ -58,7 +61,7 @@
 
   <form action="?login=1" method="post">
     Username:<br>
-    <input type="text" size="40" maxlength="250" name="user"><br><br>
+    <input type="text" value="<?php echo (isset($username_value))?$username_value:'';?>" size="40" maxlength="250" name="user"><br><br>
 	 
     Password:<br>
     <input type="password" size="40"  maxlength="250" name="password"><br>
