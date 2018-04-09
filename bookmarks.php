@@ -65,8 +65,8 @@
         }
         ?>
       </select>
-      <input type='text' name='bookmark-name' placeholder="Bookmark Title" />
-      <input type='text' name='bookmark-url' placeholder="Bookmark URL" />
+      <input type='text' name='bookmark-name' placeholder="Bookmark Title" value="<?php echo (isset($_GET['title'])) ? $_GET['title'] : ''; ?>"/>
+      <input type='text' name='bookmark-url' placeholder="Bookmark URL" value="<?php echo (isset($_GET['url'])) ? $_GET['url'] : ''; ?>" />
       <input type='text' name='bookmark-description' placeholder="Bookmark Description" />
       <button type='submit' name='create-bookmark'>Create Bookmark</button>
     </div>
