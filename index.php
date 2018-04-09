@@ -41,7 +41,9 @@
 
       if( $user !== false && password_verify($password, $user['password']) ) {
         $_SESSION['user_id'] = $user['id'];
-        header('Location: /bookmarks.php');
+        $url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $query_string = parse_url($url, PHP_URL_QUERY);
+        header('Location: /bookmarks.php?' . $query_string);
         die();
       }
       else {
