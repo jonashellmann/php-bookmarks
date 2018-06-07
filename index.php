@@ -47,7 +47,7 @@
         die();
       }
       else {
-        $errortext = "Username or pasword is not correct!";
+        $errortext = "Username or password is not correct!";
       }
     }
     catch (PDOException $e){
